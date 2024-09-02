@@ -1,0 +1,66 @@
+// o problema está disponível em https://neps.academy/br/exercise/620
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+#define pb push_back
+#define ft first
+#define sd second
+typedef long long ll;
+const int N = 2000+5;
+const ll inf = 1e15;
+
+int n, m, dp[N][N][2];
+string a, b;
+
+// a DP irá retornar a 
+// usarei o mark pra marcar que se ele eh 1, eu estou obrigando uma substring ser construida com o a[i] atual
+int solve(int i, int j, int mark){
+    // casos base
+    if(i==a.size()){
+        // observe que quando chego aqui, mark sempre será 0
+        // ou seja, se eu estou aqui, eh porque deu certo a substring escolhida pelo solve
+        // logo retornarei infinito, para não ser contado na resposta
+        return N; // inf
+    }
+    if(j==b.size()){
+        // o solve andara nas transições de forma que para cada substring de a escolhida, ele vai tentar dar matching em b avançando j o menos possivel
+        // logo se eu cheguei aqui, eu não conseguirei dar matching mais com o a[i]
+        
+        return 1; // se eu retornasse 0, eu estaria dando o valor do tamanho de uma substring valida (observe que eu sempre somo 1 apenas na primeira transição, quando consigo dar matching em um caracter)
+        // logo ao somar 1 eu vou obter um tamanho de uma substring que nao deu matching com a[i]
+    }
+
+    int &ans = dp[i][j][mark];
+    if(ans!=-1) return ans;
+    ans = N; // inf
+
+    // se mark == 1, eu quero dar matching com o atual i
+
+    if(a[i] == b[j]){
+        ans = min(ans, solve(i+1, j+1, 0)+1); 
+        // a[i] achou um correspondente em b[j], logo posso escolher dar matching usando a[i] e b[j], mas observe que se mark == 1, não eh uma escolha, é uma obrigação, pq eu realmente to procurando alguem que dê matching com a[i]
+    }
+    else{
+        ans = min(ans, solve(i, j+1, 1)); // obrigo a dar matching com o i atual, logo avanço o j pra procurar o prox caracter de b que da certo com a[i]
+    }
+
+    if(mark==0) // se mark == 1, eu não posso avançar i, porque eu preciso dar matching de a[i] com algum b[w], w>=j
+        ans = min(ans, solve(i+1, j, 0)); // se mark == 0, posso escoher nao obrigar a dar matching com o a[i], ou seja
+    
+    return ans;
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    cin>>n>>m;
+    cin>>a>>b;
+    memset(dp, -1, sizeof(dp));
+    cout<<solve(0,0,0)<<"\n";
+	return 0;
+}
