@@ -1,0 +1,68 @@
+// The program finds the longest common subsequence
+// the problem can be found at https://atcoder.jp/contests/dp/tasks/dp_f
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+#define pb push_back
+#define ft first
+#define sd second
+typedef long long ll;
+const int N = 3000+5;
+const ll inf = 1e15;
+
+int dp[N][N];
+string a, b;
+
+int solve(int i, int j){
+    if(i==a.size() || j==b.size()){
+        return 0;
+    }
+    int &ans = dp[i][j];
+    if(ans!=-1) return ans;
+    ans = 0;
+
+    if(a[i] == b[j]){
+        return ans = solve(i+1, j+1)+1;
+    }
+    ans = max(ans, solve(i+1, j));
+    ans = max(ans, solve(i, j+1));
+    return ans;
+}
+
+string string_maior="";
+
+// walk serve para recuperar a substring maior que é possível ser formada
+void walk(int i, int j){
+    if(i==a.size() || j==b.size()){
+        return;
+    }
+    if(a[i]==b[j]){
+        string_maior+=a[i];
+        walk(i+1, j+1);
+        return;
+    }
+    if(solve(i+1, j) == dp[i][j]){
+        walk(i+1, j);
+        return;
+    }
+    if(solve(i, j+1) == dp[i][j]){
+        walk(i, j+1);
+        return;
+    }
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    cin>>a>>b;
+    memset(dp, -1, sizeof(dp));
+    solve(0, 0);
+    walk(0, 0);
+    cout<<string_maior<<"\n";
+	return 0;
+}
