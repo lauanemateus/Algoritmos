@@ -1,0 +1,40 @@
+// the problem can be found at https://codeforces.com/contest/1968/problem/B
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+#define pb push_back
+#define ft first
+#define sd second
+typedef long long ll;
+const int N = 3000+5;
+const ll inf = 1e15;
+
+int t, n, m;
+string a, b;
+
+void solve(){
+    cin>>n>>m;
+    cin>>a>>b;
+    int ans=0;
+
+    int i=0, j=0;
+    while(i<n && j<m){
+        if(a[i]==b[j]) ans++, i++, j++;
+        else j++;
+    }
+
+    cout<<ans<<"\n";
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    cin>>t;
+    while(t--) solve();
+	return 0;
+}
