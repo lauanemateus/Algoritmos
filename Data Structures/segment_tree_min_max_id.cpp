@@ -8,7 +8,7 @@ const ll INF = 1e15;
 struct no{
     int val_min, val_max, id_min, id_max;
     no(){
-        val_min = N, val_max = -N, id_min = id_max = -1;
+        val_min = N, val_max = -N, id_min = id_max = -1; // quando um no é inicializado, são atribuidos esses valores (nulos)
     }
 };
 
@@ -16,7 +16,7 @@ int teste;
 int n;
 no t[4*N], vetor[N], nulo;
 
-no merge(no esq, no dir){
+no merge(no esq, no dir){ // nulo impacta aqui
     no ans;
     // atualiza id's
     if(esq.val_min<dir.val_min){
@@ -44,7 +44,7 @@ void build(no vetor[], no t[], int v, int tl, int tr) {
     }
 }
 
-no query(no vetor, no t[], int v, int tl, int tr, int l, int r) {
+no query(no vetor[], no t[], int v, int tl, int tr, int l, int r) {
     if (l > r) 
         return nulo;
     if (l == tl && r == tr) {
@@ -56,7 +56,7 @@ no query(no vetor, no t[], int v, int tl, int tr, int l, int r) {
 }
 
 // tl e tr se referem à árvore
-void update(no vetor, no t[], int v, int tl, int tr, int pos, int new_val) {
+void update(no vetor[], no t[], int v, int tl, int tr, int pos, int new_val) {
     if (tl == tr) {
         t[v].val_min = t[v].val_max = new_val;
     } else {
