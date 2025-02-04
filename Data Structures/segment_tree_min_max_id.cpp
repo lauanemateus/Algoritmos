@@ -33,7 +33,7 @@ no merge(no esq, no dir){ // nulo impacta aqui
     return ans;
 }
 
-void build(no vetor[], no t[], int v, int tl, int tr) {
+void build(no vetor[], no t[], int v, int tl, int tr) { // v começa de 1
     if (tl == tr) {
         t[v]=vetor[tl];
     } else {
