@@ -40,14 +40,6 @@ struct Centroid{
         r=build(1, k);  
     }
 
-    void print(int v, int ant, int dist){
-        cout<<"v="<<v<<" qtd de caminhos com dist = "<<dist<<" eh "<< count_caminhos[dist] <<"\n";  
-        for(auto u:graph[v]){
-            if(u==ant || vis[u]) continue;
-            print(u, v, dist+1);
-        }
-    }
-
     // constroi o centroid decomposition
     int build(int u, int k){
         set_tam(u,u);
@@ -56,22 +48,13 @@ struct Centroid{
 
         count_caminhos.clear();
         count_caminhos[0] = 1;
-        // cout<<"centroid = "<<u<<"\n";
         solve(u, u, 0, 1, k); // adiciona a arvore
-        // print(u, u, 0);
         for(auto v: graph[u]){
             if(vis[v]) continue;
-            // cout<<"remove\n";
             solve(v, u, 1, 0, k); // remove a subarvore
-            // print(v, u, 1);
-            // cout<<"calcula\n";
             solve(v, u, 1, 2, k); // calcula a resposta em relação à subarvore
-            // print(v, u, 1);
-            // cout<<"adiciona de volta\n";
             solve(v, u, 1, 1, k); // adiciona a subarvore
-            // print(v, u, 1);
         } 
-        // cout<<"\n";
 
         p[u]=u;
         for(auto v: graph[u]){
