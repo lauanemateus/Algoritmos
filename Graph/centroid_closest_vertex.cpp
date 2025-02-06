@@ -23,7 +23,7 @@ vector<vector<int>> st;
 int cc;
 int pai[N], cor[N];
 
-// fazer todos os c·lculos de LCA necess·rios.
+// fazer todos os c√°lculos de LCA necess√°rios.
 void dfs_lca(int x, int p) {
     st[x][0]=p;
     for(int i=1; i<=K; i++){
@@ -39,7 +39,7 @@ void dfs_lca(int x, int p) {
     out[x]=cc++;
 }
 
-// funÁ„o para inicializar o LCA de todos os caras.
+// fun√ß√£o para inicializar o LCA de todos os caras.
 void lca_init(int n) {
     in.resize(n);
     out.resize(n);
@@ -53,12 +53,12 @@ void lca_init(int n) {
     dfs_lca(1,1);
 }
 
-// u È ancestral de v
+// u √© ancestral de v
 bool is_ancestor(int u, int v) {
     return in[u] <= in[v] && out[u] >= out[v];
 }
 
-// achar o LCA entre dois vÈrtices.
+// achar o LCA entre dois v√©rtices.
 int lca(int u, int v) {
     if(is_ancestor(u, v)) return u;
     if(is_ancestor(v, u)) return v;
@@ -88,7 +88,7 @@ struct Centroid{
     int n; // qtd de vertices 
     int r; // raiz do centroide
 
-    // grafo como referÍncia!
+    // grafo como refer√™ncia!
     Centroid(int n, vector<vector<int>> & graph) : graph(graph), n(n){
         tam.resize(n+10);
         vis.resize(n+10);
@@ -116,7 +116,7 @@ struct Centroid{
         return u;
     }
 
-    // ajusta os tamanhos das sub·rvores.
+    // ajusta os tamanhos das sub√°rvores.
     void set_tam(int u,int ant){
         tam[u]=1;
         for(auto v: graph[u]){
@@ -143,10 +143,10 @@ struct Centroid{
         return u;
     }
 
-    // pintar um cara, quer dizer que estou colocando a dist‚ncia dele como 0
+    // pintar um cara, quer dizer que estou colocando a dist√¢ncia dele como 0
     void update(int u,int ant){
         best[u]={0, u};
-        int x = u; // quando dou update em x, sÛ preciso mudar os que est„o em cima, os pais
+        int x = u; // quando dou update em x, s√≥ preciso mudar os que est√£o em cima, os pais
         while(u!=p[u]){
             u = p[u];
             int tmp = get_dist(u,x);
@@ -155,17 +155,13 @@ struct Centroid{
                 best[u].sd = x;
             }
         }
-        for(auto v: graph[u]){
-            if(v == ant || vis[v]) continue;
-            update(v,u);
-        }
     }
 
-    // buscar o 0 mais prÛximo de u.
+    // buscar o 0 mais pr√≥ximo de u.
     pair<int,int> query(int u, int ant) {
         pair<int,int> rs = best[u];
         int x = u;
-        while(u!=p[u]){ // os pais guardam a melhor resposta em relaÁ„o a todos seus descendentes. Logo, na query, sÛ preciso olhar para os pais
+        while(u!=p[u]){ // os pais guardam a melhor resposta em rela√ß√£o a todos seus descendentes. Logo, na query, s√≥ preciso olhar para os pais
             u=p[u];
             int tmp = best[u].ft+get_dist(u,x);
             if(rs.ft > tmp){
