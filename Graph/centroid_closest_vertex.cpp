@@ -144,7 +144,7 @@ struct Centroid{
     }
 
     // pintar um cara, quer dizer que estou colocando a distância dele como 0
-    void update(int u,int ant){
+    void update(int u){
         best[u]={0, u};
         int x = u; // quando dou update em x, só preciso mudar os que estão em cima, os pais
         while(u!=p[u]){
@@ -158,7 +158,7 @@ struct Centroid{
     }
 
     // buscar o 0 mais próximo de u.
-    pair<int,int> query(int u, int ant) {
+    pair<int,int> query(int u) {
         pair<int,int> rs = best[u];
         int x = u;
         while(u!=p[u]){ // os pais guardam a melhor resposta em relação a todos seus descendentes. Logo, na query, só preciso olhar para os pais
@@ -190,15 +190,15 @@ int32_t main(){
     lca_init(n+1);
     Centroid c(n+1, graph);
 
-    c.update(1, 1);
+    c.update(1);
     int t, v;
     for(int i=0; i<q; i++) {
         cin>>t>>v;
         if(t==1){
-            c.update(v, v);
+            c.update(v);
         }
         else{
-            cout << c.query(v, v).ft <<"\n";
+            cout << c.query(v).ft <<"\n";
         }
     }
     return 0;
