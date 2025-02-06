@@ -24,7 +24,6 @@ struct Centroid{
     vector<bool> vis; // visitado para construir o centroide
     vector<int> tam; // tam da subarvore
     vector<vector<int>> & graph; // referencia da arvore original
-    vector<pair<int,int>> best; // melhores distancias.
     int n; // qtd de vertices 
     int r; // raiz do centroide
     int k; // uma certa distancia
