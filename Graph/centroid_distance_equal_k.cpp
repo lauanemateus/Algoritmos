@@ -1,4 +1,4 @@
-// how many paths on a tree equal to k? 
+// how many paths on a tree equal to k? https://codeforces.com/contest/161/problem/D
 // the ideia is to find the solution for each centroid. There is no need to construct a centroid tree.
 
 #include<bits/stdc++.h>
@@ -29,9 +29,9 @@ struct Centroid{
     int r; // raiz do centroide
     int k; // uma certa distancia
     ll qtd_caminhos_equal_k=0;
-    map<ll, ll> count_caminhos; // qtd de caminhos com uma distância, dado uma raiz
+    map<ll, ll> count_caminhos; // qtd de caminhos com uma distÃ¢ncia, dado uma raiz
 
-    // grafo como referência!
+    // grafo como referÃªncia!
     Centroid(int n, vector<vector<int>> & graph, int k) : graph(graph), n(n), k(k){
         tam.resize(n+10);
         vis.resize(n+10);
@@ -65,7 +65,7 @@ struct Centroid{
             solve(v, u, 1, 0, k); // remove a subarvore
             // print(v, u, 1);
             // cout<<"calcula\n";
-            solve(v, u, 1, 2, k); // calcula a resposta em relação à subarvore
+            solve(v, u, 1, 2, k); // calcula a resposta em relaÃ§Ã£o Ã  subarvore
             // print(v, u, 1);
             // cout<<"adiciona de volta\n";
             solve(v, u, 1, 1, k); // adiciona a subarvore
@@ -82,7 +82,7 @@ struct Centroid{
         return u;
     }
 
-    // ajusta os tamanhos das subárvores.
+    // ajusta os tamanhos das subÃ¡rvores.
     void set_tam(int u,int ant){
         tam[u]=1;
         for(auto v: graph[u]){
