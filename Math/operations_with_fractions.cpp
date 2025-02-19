@@ -10,8 +10,8 @@ typedef pair<ll, ll> pll;
 typedef long long ll;
 
 struct Fraction{
-    ll x, y; // a fração é representada por x/y
-    Fraction(): x(0), y(1) {} // construtor padrão
+    ll x, y; // the fraction is represented by x/y
+    Fraction(): x(0), y(1) {} // default constructor
     Fraction(ll x, ll y) : x(x), y(y) {}
 
     Fraction operator +(const Fraction &f){
