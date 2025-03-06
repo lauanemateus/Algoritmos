@@ -63,13 +63,6 @@ int main(){
             qt[comp]++;
         } 
     }
-    // cin>>n;
-    // for (int i = 0; i < n; i++)
-    // {
-    //     int x;
-    //     cin>>x;
-    //     qt[x]++;
-    // }
     
     ll x, sum=0;
     for(int i=1; i<=n; i++){
@@ -81,7 +74,7 @@ int main(){
             aux[x]++;
             x*=2;
         }
-        // cout<<"i="<<i<<" sum="<<sum<<"\n";
+       
         for(int j=0; j<31; j++){
             if((1<<j)&(qt[i]-sum/i)) aux[(1<<j)*i]++;
         }
@@ -98,6 +91,5 @@ int main(){
         else cout<<"0";
     }
     cout<<"\n";
-    // for(auto x:v) cout<<x<<" ";
     return 0;
 }
