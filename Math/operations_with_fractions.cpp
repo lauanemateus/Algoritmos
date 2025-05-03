@@ -58,7 +58,7 @@ struct Fraction{
         ans.x /= gcd, ans.y /= gcd;
         return ans;
     }
-    Fraction operator =(int i){
+    Fraction operator =(ll i){
         this->x=i, this->y=1;
         return *this;
     }
