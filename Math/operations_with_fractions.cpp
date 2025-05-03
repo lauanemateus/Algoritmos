@@ -58,8 +58,16 @@ struct Fraction{
         ans.x /= gcd, ans.y /= gcd;
         return ans;
     }
+    Fraction operator =(int i){
+        this->x=i, this->y=1;
+        return *this;
+    }
     bool operator < (const Fraction &f){
         return this->x*f.y>f.x*this->y;
+    }
+    friend ostream& operator<<(ostream& os, const Fraction& f) {
+        os << f.x << "/" << f.y;
+        return os;
     }
 };
 
